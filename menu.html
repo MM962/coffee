@@ -106,6 +106,24 @@
       pointer-events:none;
     }
 
+    .card-image{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .card-image img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .top{
       position: relative;
       display:flex;
@@ -230,6 +248,9 @@
     <section class="grid">
       <!-- 1 -->
       <article class="card">
+        <div class="card-image">
+          <img src="images/sunergos-lyamungo.jpg" alt="Sunergos Coffee Tanzania Peaberry Lyamungo label" />
+        </div>
         <div class="top">
           <div>
             <h2 class="name">Tanzania peaberry lyamungo</h2>
@@ -255,6 +276,9 @@
 
       <!-- 2 -->
       <article class="card">
+        <div class="card-image">
+          <img src="images/mad-lab-lemongrass.jpg" alt="Mad Lab Coffee Roasters Lemongrass Colombia co-ferment label" />
+        </div>
         <div class="top">
           <div>
             <h2 class="name">Lemongrass</h2>
@@ -280,6 +304,9 @@
 
       <!-- 3 -->
       <article class="card">
+        <div class="card-image">
+          <img src="images/onibus-step.jpg" alt="Onibus Coffee Step blend packaging design" />
+        </div>
         <div class="top">
           <div>
             <h2 class="name">Step blend</h2>
