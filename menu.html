@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coffee Menu</title>
+  <style>
+    :root{
+      --bg: #0f1115;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.04);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+      --faint: rgba(255,255,255,0.48);
+      --ring: rgba(255,255,255,0.12);
+      --accent: #e7c07a;
+      --accent2: #7ad6e7;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(900px 600px at 20% 10%, rgba(231,192,122,0.14), transparent 60%),
+        radial-gradient(900px 600px at 80% 20%, rgba(122,214,231,0.10), transparent 60%),
+        radial-gradient(900px 700px at 50% 100%, rgba(255,255,255,0.06), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      letter-spacing: 0.2px;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 18px 64px;
+    }
+
+    header{
+      display:flex;
+      align-items:baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 6px 18px;
+      border-bottom: 1px solid var(--ring);
+    }
+
+    .title{
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 750;
+      line-height: 1.1;
+      margin:0;
+    }
+
+    .subtitle{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 520;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+      border: 1px solid var(--ring);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(231,192,122,0.15);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .card{
+      grid-column: span 12;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--ring);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.34);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(600px 200px at 20% 0%, rgba(231,192,122,0.12), transparent 55%);
+      pointer-events:none;
+    }
+
+    .top{
+      position: relative;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .name{
+      font-size: 18px;
+      font-weight: 760;
+      margin:0;
+      line-height: 1.25;
+    }
+
+    .process{
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 560;
+      margin-top: 6px;
+    }
+
+    .pill{
+      align-self: flex-start;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--ring);
+      background: rgba(0,0,0,0.18);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 0.3px;
+    }
+
+    .notes{
+      position: relative;
+      margin: 12px 0 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.14);
+    }
+
+    .notes .label{
+      font-size: 11px;
+      color: var(--faint);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .notes .body{
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 620;
+    }
+
+    .meta{
+      position: relative;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .roaster{
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .extract{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .kv{
+      padding: 7px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.80);
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .kv strong{ color: rgba(255,255,255,0.92); }
+
+    @media (min-width: 820px){
+      .card{ grid-column: span 6; }
+    }
+
+    /* Print-friendly */
+    @media print{
+      body{ background: #fff; color:#111; }
+      .card, header{ box-shadow:none; }
+      .card{ background:#fff; border:1px solid #ddd; }
+      .badge{ display:none; }
+      .roaster, .process, .kv{ color:#222; }
+      .notes{ background:#fafafa; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1 class="title">Coffee Menu</h1>
+        <p class="subtitle">Three espresso recipes — origin, process, notes, and extraction specs.</p>
+      </div>
+      <div class="badge"><span class="dot"></span> espresso bar</div>
+    </header>
+
+    <section class="grid">
+      <!-- 1 -->
+      <article class="card">
+        <div class="top">
+          <div>
+            <h2 class="name">Tanzania peaberry lyamungo</h2>
+            <div class="process">washed process</div>
+          </div>
+          <div class="pill">single origin</div>
+        </div>
+
+        <div class="notes">
+          <div class="label">Tasting notes</div>
+          <div class="body">molasses, cocoa, blackberry</div>
+        </div>
+
+        <div class="meta">
+          <div class="roaster">Sunergos • Louisville, Kent.</div>
+          <div class="extract" aria-label="Extraction">
+            <div class="kv"><strong>24g</strong></div>
+            <div class="kv"><strong>9 bar</strong></div>
+            <div class="kv"><strong>92º</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card">
+        <div class="top">
+          <div>
+            <h2 class="name">Lemongrass</h2>
+            <div class="process">Columbia washed co-ferment</div>
+          </div>
+          <div class="pill" style="--accent: var(--accent2);">experimental</div>
+        </div>
+
+        <div class="notes">
+          <div class="label">Tasting notes</div>
+          <div class="body">actually like lemongrass</div>
+        </div>
+
+        <div class="meta">
+          <div class="roaster">Mad Lab • Los Angeles, Calif.</div>
+          <div class="extract" aria-label="Extraction">
+            <div class="kv"><strong>36g</strong></div>
+            <div class="kv"><strong>8 bar</strong></div>
+            <div class="kv"><strong>96º</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="card">
+        <div class="top">
+          <div>
+            <h2 class="name">Step blend</h2>
+            <div class="process">Kenya washed / Ethiopia washed / Guatemala washed</div>
+          </div>
+          <div class="pill">blend</div>
+        </div>
+
+        <div class="notes">
+          <div class="label">Tasting notes</div>
+          <div class="body">berries, citrus, chocolate</div>
+        </div>
+
+        <div class="meta">
+          <div class="roaster">Onibus • Tokyo, Japan</div>
+          <div class="extract" aria-label="Extraction">
+            <div class="kv"><strong>36g</strong></div>
+            <div class="kv"><strong>8 bar</strong></div>
+            <div class="kv"><strong>94º</strong></div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</body>
+</html>
